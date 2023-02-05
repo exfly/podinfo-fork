@@ -1,0 +1,20 @@
+---
+# A list of scrape configurations.
+scrape-configs:
+  # The job name assigned to scraped profiles by default.
+  - job-name: podinfo
+
+    # How frequently to scrape targets by default.
+    scrape-interval: 10s
+
+    # The list of profiles to be scraped from the targets.
+    enabled-profiles: [cpu, mem, goroutines, mutex, block]
+
+    # List of labeled statically configured targets for this job.
+    static-configs:
+      - application: podinfo
+        spy-name: gospy
+        targets:
+          - podinfo:9898
+        labels:
+          env: dev

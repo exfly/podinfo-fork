@@ -1,0 +1,20 @@
+version: '3.5'
+
+services:
+  pyroscope:
+    image: "pyroscope/pyroscope:latest"
+    ports:
+      - "4040:4040"
+    command:
+      - "server"
+    volumes:
+      - "./pyroscope-server.yml:/etc/pyroscope/server.yml"
+
+  podinfo:
+    image: 'stefanprodan/podinfo:6.3.3'
+    command:
+      - ./podinfo
+      - --level=debug
+      - --stress-memory=500
+    ports:
+      - "9898:9898"
